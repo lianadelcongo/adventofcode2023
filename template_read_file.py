@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys
 
 def read_file_lines(file_path):
@@ -18,7 +20,6 @@ if __name__ == "__main__":
     lines = read_file_lines(file_path)
 
     if lines is not None:
-        print(f"Contents of {file_path}:")
         for line in lines:
             print(line.strip())
 
