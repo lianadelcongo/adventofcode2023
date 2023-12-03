@@ -38,9 +38,7 @@ def find_numbers(lines: "list[str]")->"list[int]":
     nums = []
     for y in range(0, max_y):
         num=""
-        print(f"Y {y}")
         for x in range(0, max_x):
-            print(f"{y}-{x} {max_y} {max_x}")
             if lines[y][x].isnumeric():
                 if len(num) == 0:
                     startx = x
@@ -56,7 +54,6 @@ def find_numbers(lines: "list[str]")->"list[int]":
                 if has_symbol:
                     nums.append(int(num))
                 num = ""
-    print(f"{nums}")
     return nums
 
 
