@@ -17,22 +17,22 @@ class Figure:
         for c in self.columns:
             print("".join(c))
 
-    def reflection(self, lines:"list[str]")->int:
-        ret = 0
+    def reflection(self, lines:"list[str]", smudge = 0)->int:
         for c in range(0, len(lines)-1):
+            differences = 0
             for offset in range(0, len(lines)-1):
                 if c-offset >= 0 and c+1+offset < len(lines):
-                    if lines[c-offset] != lines[c+1+offset]:
-                        break
+                    differences += len([x for x in zip(lines[c-offset], lines[c+1+offset]) if x[0] != x[1]])
             else:
-                ret += c+1
-        return ret
+                if differences == smudge:
+                        return c+1
+        return 0
     
-    def column_reflection(self)->int:
-        return self.reflection(self.columns)
+    def column_reflection(self, smudge = 0)->int:
+        return self.reflection(self.columns, smudge)
 
-    def row_reflection(self)->int:
-        return self.reflection(self.rows)*100
+    def row_reflection(self, smudge = 0)->int:
+        return self.reflection(self.rows, smudge)*100
 
 
 def read_file_lines(file_path):
@@ -55,16 +55,18 @@ if __name__ == "__main__":
     if lines is not None:
         lines = [x.strip() for x in lines]
         star1 = 0
+        star2 = 0
         figure = []
         for line in lines:
             if line == "":
                 f = Figure(figure)
                 star1 += f.column_reflection() + f.row_reflection()
+                star2 += f.column_reflection(1) + f.row_reflection(1)
                 figure = []
             else:
                 figure.append(line)
         print(f"Star1: {star1}")
-
+        print(f"Star2: {star2}")
             
 
 
