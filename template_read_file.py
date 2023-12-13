@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.9
 
 import sys
 
@@ -6,7 +6,7 @@ def read_file_lines(file_path):
     try:
         with open(file_path, 'r') as file:
             lines = file.readlines()
-            return lines
+            return [l.strip() for l in lines]
     except FileNotFoundError:
         print(f"Error: File not found - {file_path}")
         return None
